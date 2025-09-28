@@ -5,21 +5,93 @@
   <title>Sweepstake Maker</title>
 
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
     h1 {
       text-align: center;
+      color: #333;
+      border-bottom: 3px solid #007bff;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-left: 4px solid #007bff;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    button:active {
+      transform: translateY(1px);
+    }
+    .form-description {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
   <h1>SweepStake Maker!!!</h1>
+  <p class="form-description">Create your custom sweepstake by specifying the number of people and contestants</p>
+  
   <form action="display.html" method="get">
-    <label for="peopleNum">How Many People:</label>
-    <input type="number" id="peopleNum" name="peopleNum" required><br><br>
+    <div class="form-group">
+      <label for="peopleNum">How Many People:</label>
+      <input type="number" id="peopleNum" name="peopleNum" min="1" required>
+    </div>
 
-    <label for="contestantNum">How Many Contestants:</label>
-    <input type="number" id="contestantNum" name="contestantNum" required><br><br>
+    <div class="form-group">
+      <label for="contestantNum">How Many Contestants:</label>
+      <input type="number" id="contestantNum" name="contestantNum" min="1" required>
+    </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Create Sweepstake</button>
   </form>
 </body>
 </html>

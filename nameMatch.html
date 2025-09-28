@@ -26,9 +26,9 @@
     var peopleNames = []
     var contestantNames = []
 
-    for (let i=1; i<= peopleNum; i++) {
+    for (let i=0; i< peopleNum; i++) {
       var curPersonName = params.get('personName' + str(i));
-      peopleNames.append(curPersonName);
+      peopleNames[i]=curPersonName;
     }
 
     const label = document.createElement('label');

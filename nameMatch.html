@@ -22,10 +22,13 @@
     }
 
     const label = document.createElement('label');
-    label.textContent = peopleNames[0];
+    label.textContent = peopleNames;
 
     const label2 = document.createElement('label');
     label2.textContent = "Tiny Billlll;
+
+    container.appendChild(label);
+    container.appendChild(label2);
     // for (let i = 1; i <= peopleNum; i++) {
     //     const label = document.createElement('label');
     //     label.textContent = `Person Name ${i}: `;

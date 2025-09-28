@@ -65,6 +65,20 @@
         container.appendChild(document.createElement('br'));
         container.appendChild(document.createElement('br'));
       }
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.id = "peopleNum";
+    input.name = "peopleNum";
+    input.value = peopleNum;
+    container.appendChild(input);
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.id = "contestantNum";
+    input.name = "contestantNum";
+    input.value = contestantNum;
+    container.appendChild(input);
     
   </script>
 </body>

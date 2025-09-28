@@ -6,11 +6,12 @@
 </head>
 <body>
   <h1>Name Match Ups</h1>
+  <p id="output"></p>
+  
   <div id="outputcontainer"></div>
 
   
   <script>
-    alert("tiny bill")
     const label2 = document.createElement('label');
     label2.textContent = "Tiny Billlll";
 
@@ -21,9 +22,14 @@
     const params = new URLSearchParams(window.location.search);
     const peopleNum = params.get('peopleNum');
     const contestantNum = params.get('contestantNum');
-    alert(peopleNum)
-    alert("Big bill")
-      
+
+    const output = document.getElementById('output');
+    if (peopleNum !== null && contestantNum !== null) {
+      output.textContent = `${peopleNum} People and ${contestantNum} Contestants`;
+    } else {
+      output.textContent = 'No numbers provided.';
+    }
+    
     var peopleNames = []
     var contestantNames = []
 

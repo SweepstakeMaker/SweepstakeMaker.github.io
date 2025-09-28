@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Display Numbers</title>
+</head>
+<body>
+  <h1>Numbers Submitted</h1>
+  <p id="output"></p>
+
+  <script>
+    // Parse URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const num1 = params.get('peopleNum');
+    const num2 = params.get('contestantNum');
+
+    // Display them
+    const output = document.getElementById('output');
+    if (num1 !== null && num2 !== null) {
+      output.textContent = `Number 1: ${num1}, Number 2: ${num2}`;
+    } else {
+      output.textContent = 'No numbers provided.';
+    }
+  </script>
+</body>
+</html>

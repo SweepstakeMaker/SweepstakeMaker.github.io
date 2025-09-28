@@ -3,79 +3,248 @@
 <head>
   <meta charset="UTF-8">
   <title>Name Match Ups</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .name-list {
+      background-color: #f5f5f5;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border-left: 4px solid #007bff;
+    }
+    .name-item {
+      margin: 8px 0;
+      padding: 5px;
+      background-color: white;
+      border-radius: 3px;
+    }
+    .match-item {
+      margin: 10px 0;
+      padding: 15px;
+      background-color: #e8f4fd;
+      border-radius: 5px;
+      border-left: 4px solid #28a745;
+    }
+    .person-name {
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 8px;
+    }
+    .contestant-matches {
+      margin-left: 20px;
+    }
+    .contestant-match {
+      margin: 4px 0;
+      padding: 3px 8px;
+      background-color: #fff;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .plain-text-section {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 3px;
+      border: 1px solid #dee2e6;
+    }
+    .plain-text-item {
+      margin: 5px 0;
+      padding: 8px;
+      background-color: white;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #333;
+      border-left: 3px solid #007bff;
+    }
+    h2 {
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Name Match Ups</h1>
-  <p id="output"></p>
+  <h1>Name Lists</h1>
+  <p id="summary"></p>
   
-  <div id="outputcontainer"></div>
+  <div id="matchSection"></div>
+  <div id="peopleSection"></div>
+  <div id="contestantSection"></div>  
 
-  
   <script>
-    const label2 = document.createElement('label');
-    label2.textContent = "Tiny Billlll";
-
-    const container = document.getElementById('outputcontainer');
-    container.appendChild(label2);
-    
     // Parse URL parameters
     const params = new URLSearchParams(window.location.search);
-    const peopleNum = params.get('peopleNum');
-    const contestantNum = params.get('contestantNum');
+    const peopleNum = parseInt(params.get('peopleNum')) || 0;
+    const contestantNum = parseInt(params.get('contestantNum')) || 0;
 
-    const output = document.getElementById('output');
-    if (peopleNum !== null && contestantNum !== null) {
-      output.textContent = `${peopleNum} People and ${contestantNum} Contestants`;
+    // Display summary
+    const summary = document.getElementById('summary');
+    if (peopleNum > 0 && contestantNum > 0) {
+      summary.textContent = `Received ${peopleNum} people and ${contestantNum} contestants`;
     } else {
-      output.textContent = 'No numbers provided.';
-    }
-    
-    var peopleNames = []
-    var contestantNames = []
-
-    for (let i=1; i<= peopleNum; i++) {
-      var curPersonName = params.get(`personName${i}`);
-      peopleNames[i]=curPersonName;
+      summary.textContent = 'No data received.';
     }
 
-    const label = document.createElement('label');
-    label.textContent = peopleNames[0];
-    container.appendChild(label);
+    // Collect people names
+    const peopleNames = [];
+    for (let i = 1; i <= peopleNum; i++) {
+      const name = params.get(`personName${i}`);
+      if (name && name.trim()) {
+        peopleNames.push(name.trim());
+      }
+    }
 
-    // for (let i = 1; i <= peopleNum; i++) {
-    //     const label = document.createElement('label');
-    //     label.textContent = `Person Name ${i}: `;
-    //     label.setAttribute('for', `name${i}`);
+    // Collect contestant names
+    const contestantNames = [];
+    for (let i = 1; i <= contestantNum; i++) {
+      const name = params.get(`contestantName${i}`);
+      if (name && name.trim()) {
+        contestantNames.push(name.trim());
+      }
+    }
 
-    //     const input = document.createElement('input');
-    //     input.type = 'text';
-    //     input.id = `personName${i}`;
-    //     input.name = `personName${i}`;
-    //     input.required = true;
+    // Display people names
+    const peopleSection = document.getElementById('peopleSection');
+    const peopleTitle = document.createElement('h2');
+    peopleTitle.textContent = `People (${peopleNames.length})`;
+    peopleSection.appendChild(peopleTitle);
 
-    //     container.appendChild(label);
-    //     container.appendChild(input);
-    //     container.appendChild(document.createElement('br'));
-    //     container.appendChild(document.createElement('br'));
-    //   }
+    if (peopleNames.length > 0) {
+      const peopleList = document.createElement('div');
+      peopleList.className = 'name-list';
+      
+      peopleNames.forEach((name, index) => {
+        const nameItem = document.createElement('div');
+        nameItem.className = 'name-item';
+        nameItem.textContent = `${index + 1}. ${name}`;
+        peopleList.appendChild(nameItem);
+      });
+      
+      peopleSection.appendChild(peopleList);
+    } else {
+      const noNames = document.createElement('p');
+      noNames.textContent = 'No people names provided.';
+      peopleSection.appendChild(noNames);
+    }
 
-    //   for (let i = 1; i <= contestantNum; i++) {
-    //     const label = document.createElement('label');
-    //     label.textContent = `Contestant Name ${i}: `;
-    //     label.setAttribute('for', `name${i}`);
+    // Display contestant names
+    const contestantSection = document.getElementById('contestantSection');
+    const contestantTitle = document.createElement('h2');
+    contestantTitle.textContent = `Contestants (${contestantNames.length})`;
+    contestantSection.appendChild(contestantTitle);
 
-    //     const input = document.createElement('input');
-    //     input.type = 'text';
-    //     input.id = `contestantName${i}`;
-    //     input.name = `contestantName${i}`;
-    //     input.required = true;
+    if (contestantNames.length > 0) {
+      const contestantList = document.createElement('div');
+      contestantList.className = 'name-list';
+      
+      contestantNames.forEach((name, index) => {
+        const nameItem = document.createElement('div');
+        nameItem.className = 'name-item';
+        nameItem.textContent = `${index + 1}. ${name}`;
+        contestantList.appendChild(nameItem);
+      });
+      
+      contestantSection.appendChild(contestantList);
+    } else {
+      const noNames = document.createElement('p');
+      noNames.textContent = 'No contestant names provided.';
+      contestantSection.appendChild(noNames);
+    }
 
-    //     container.appendChild(label);
-    //     container.appendChild(input);
-    //     container.appendChild(document.createElement('br'));
-    //     container.appendChild(document.createElement('br'));
-    //   }
-    
+    // Create random matches
+    const matchSection = document.getElementById('matchSection');
+    const matchTitle = document.createElement('h2');
+    matchTitle.textContent = 'Random Matches';
+    matchSection.appendChild(matchTitle);
+
+    if (peopleNames.length > 0 && contestantNames.length > 0) {
+      // Calculate how many contestants each person should get
+      const contestantsPerPerson = Math.floor(contestantNames.length / peopleNames.length);
+      const remainder = contestantNames.length % peopleNames.length;
+      
+      // Create a shuffled copy of contestant names
+      const shuffledContestants = [...contestantNames].sort(() => Math.random() - 0.5);
+      
+      let contestantIndex = 0;
+      
+      peopleNames.forEach((personName, personIndex) => {
+        const matchItem = document.createElement('div');
+        matchItem.className = 'match-item';
+        
+        const personDiv = document.createElement('div');
+        personDiv.className = 'person-name';
+        personDiv.textContent = personName + ' is matched with:';
+        matchItem.appendChild(personDiv);
+        
+        const contestantMatchesDiv = document.createElement('div');
+        contestantMatchesDiv.className = 'contestant-matches';
+        
+        // Give this person the base number of contestants
+        let assignedContestants = contestantsPerPerson;
+        
+        // If there are remainder contestants, give one extra to the first few people
+        if (personIndex < remainder) {
+          assignedContestants++;
+        }
+        
+        for (let i = 0; i < assignedContestants && contestantIndex < shuffledContestants.length; i++) {
+          const contestantMatch = document.createElement('span');
+          contestantMatch.className = 'contestant-match';
+          contestantMatch.textContent = shuffledContestants[contestantIndex];
+          contestantMatchesDiv.appendChild(contestantMatch);
+          contestantIndex++;
+        }
+        
+        matchItem.appendChild(contestantMatchesDiv);
+        
+        // Create plain text section showing individual matches
+        const plainTextSection = document.createElement('div');
+        plainTextSection.className = 'plain-text-section';
+        
+        // Reset contestantIndex for this person's matches
+        let tempContestantIndex = contestantIndex - assignedContestants;
+        
+        for (let i = 0; i < assignedContestants; i++) {
+          const plainTextItem = document.createElement('div');
+          plainTextItem.className = 'plain-text-item';
+          plainTextItem.textContent = `${personName} - ${shuffledContestants[tempContestantIndex + i]}`;
+          plainTextSection.appendChild(plainTextItem);
+        }
+        
+        matchItem.appendChild(plainTextSection);
+        matchSection.appendChild(matchItem);
+      });
+      
+      // Show distribution info
+      const infoDiv = document.createElement('div');
+      infoDiv.style.marginTop = '20px';
+      infoDiv.style.fontStyle = 'italic';
+      infoDiv.style.color = '#666';
+      
+      if (remainder === 0) {
+        infoDiv.textContent = `Each person is matched with exactly ${contestantsPerPerson} contestant${contestantsPerPerson !== 1 ? 's' : ''}.`;
+      } else {
+        infoDiv.textContent = `${remainder} person${remainder !== 1 ? 's' : ''} get ${contestantsPerPerson + 1} contestant${contestantsPerPerson + 1 !== 1 ? 's' : ''}, the rest get ${contestantsPerPerson} contestant${contestantsPerPerson !== 1 ? 's' : ''}.`;
+      }
+      
+      matchSection.appendChild(infoDiv);
+      
+    } else if (peopleNames.length === 0) {
+      const noMatches = document.createElement('p');
+      noMatches.textContent = 'No people to match.';
+      matchSection.appendChild(noMatches);
+    } else if (contestantNames.length === 0) {
+      const noMatches = document.createElement('p');
+      noMatches.textContent = 'No contestants to match with.';
+      matchSection.appendChild(noMatches);
+    }
   </script>
 </body>
 </html>

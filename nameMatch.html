@@ -6,6 +6,8 @@
 </head>
 <body>
   <h1>Name Match Ups</h1>
+  <div id="outputcontainer"></div>
+
   
   <script>
     // Parse URL parameters
@@ -27,6 +29,7 @@
     const label2 = document.createElement('label');
     label2.textContent = "Tiny Billlll;
 
+    const container = document.getElementById('outputcontainer');
     container.appendChild(label);
     container.appendChild(label2);
     // for (let i = 1; i <= peopleNum; i++) {

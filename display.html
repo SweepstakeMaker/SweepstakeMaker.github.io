@@ -8,19 +8,64 @@
   <h1>Numbers Submitted</h1>
   <p id="output"></p>
 
+  <h1>Enter Names</h1>
+
+  <form id="nameForm">
+    <div id="inputsContainer"></div>
+    <br>
+    <button type="submit">Submit Names</button>
+  </form>
+
+  
   <script>
     // Parse URL parameters
     const params = new URLSearchParams(window.location.search);
-    const num1 = params.get('peopleNum');
-    const num2 = params.get('contestantNum');
+    const peopleNum = params.get('peopleNum');
+    const contestantNum = params.get('contestantNum');
 
     // Display them
     const output = document.getElementById('output');
-    if (num1 !== null && num2 !== null) {
-      output.textContent = `Number 1: ${num1}, Number 2: ${num2}`;
+    if (peopleNum !== null && contestantNum !== null) {
+      output.textContent = `${peopleNum} People and ${contestantNum} Contestants`;
     } else {
       output.textContent = 'No numbers provided.';
     }
+
+    const container = document.getElementById('inputsContainer');
+    for (let i = 1; i <= peopleNum; i++) {
+        const label = document.createElement('label');
+        label.textContent = `Person Name ${i}: `;
+        label.setAttribute('for', `name${i}`);
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = `personName${i}`;
+        input.name = `personName${i}`;
+        input.required = true;
+
+        container.appendChild(label);
+        container.appendChild(input);
+        container.appendChild(document.createElement('br'));
+        container.appendChild(document.createElement('br'));
+      }
+
+      for (let i = 1; i <= contestantNum; i++) {
+        const label = document.createElement('label');
+        label.textContent = `Contestant Name ${i}: `;
+        label.setAttribute('for', `name${i}`);
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = `contestantName${i}`;
+        input.name = `contestantName${i}`;
+        input.required = true;
+
+        container.appendChild(label);
+        container.appendChild(input);
+        container.appendChild(document.createElement('br'));
+        container.appendChild(document.createElement('br'));
+      }
+    
   </script>
 </body>
 </html>

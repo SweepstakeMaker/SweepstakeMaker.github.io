@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Name Match Ups</title>
+</head>
+<body>
+  <h1>Name Match Ups</h1>
+  
+  <script>
+    // Parse URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const peopleNum = params.get('peopleNum');
+    const contestantNum = params.get('contestantNum');
+
+    var peopleNames = []
+    var contestantNames = []
+
+    for (let i=1; i<= peopleNum; i++) {
+      var curPersonName = params.get('personName' + str(i));
+      peopleNames.append(curPersonName);
+    }
+
+    const label = document.createElement('label');
+    label.textContent = peopleNames;
+    
+    // for (let i = 1; i <= peopleNum; i++) {
+    //     const label = document.createElement('label');
+    //     label.textContent = `Person Name ${i}: `;
+    //     label.setAttribute('for', `name${i}`);
+
+    //     const input = document.createElement('input');
+    //     input.type = 'text';
+    //     input.id = `personName${i}`;
+    //     input.name = `personName${i}`;
+    //     input.required = true;
+
+    //     container.appendChild(label);
+    //     container.appendChild(input);
+    //     container.appendChild(document.createElement('br'));
+    //     container.appendChild(document.createElement('br'));
+    //   }
+
+    //   for (let i = 1; i <= contestantNum; i++) {
+    //     const label = document.createElement('label');
+    //     label.textContent = `Contestant Name ${i}: `;
+    //     label.setAttribute('for', `name${i}`);
+
+    //     const input = document.createElement('input');
+    //     input.type = 'text';
+    //     input.id = `contestantName${i}`;
+    //     input.name = `contestantName${i}`;
+    //     input.required = true;
+
+    //     container.appendChild(label);
+    //     container.appendChild(input);
+    //     container.appendChild(document.createElement('br'));
+    //     container.appendChild(document.createElement('br'));
+    //   }
+    
+  </script>
+</body>
+</html>

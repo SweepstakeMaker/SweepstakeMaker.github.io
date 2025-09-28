@@ -27,7 +27,7 @@
     var contestantNames = []
 
     for (let i=1; i<= peopleNum; i++) {
-      var curPersonName = params.get('personName' + str(i));
+      var curPersonName = params.get(`personName${i}`);
       peopleNames[i]=curPersonName;
     }
 

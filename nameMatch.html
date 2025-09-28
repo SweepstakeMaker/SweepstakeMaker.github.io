@@ -10,19 +10,20 @@
 
   
   <script>
-
+    alert("tiny bill")
     const label2 = document.createElement('label');
     label2.textContent = "Tiny Billlll";
 
     const container = document.getElementById('outputcontainer');
-
     container.appendChild(label2);
     
     // Parse URL parameters
     const params = new URLSearchParams(window.location.search);
     const peopleNum = params.get('peopleNum');
     const contestantNum = params.get('contestantNum');
-
+    alert(peopleNum)
+    alert("Big bill")
+      
     var peopleNames = []
     var contestantNames = []
 
